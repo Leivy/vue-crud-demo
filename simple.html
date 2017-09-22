@@ -62,7 +62,7 @@
         <tr v-for='(item,index) in newBrands' v-cloak>
           <td>{{index + 1}}</td>
           <td>{{item.name}}</td>
-          <td>{{item.createTime | dateFormat }}</td>
+          <td>{{item.ctime | dateFormat }}</td>
           <td>{{1+item.id + ',000k'}}</td>
           <td>
             <button @click='del(item.id)' type="button" class="btn-group btn-group-xs" role="group">删除</button>
@@ -76,7 +76,8 @@
   <script src="./bootstrap-4-dev/dist/js/bootstrap.js"></script>
 
   <script src="./vue.js"></script>
-  <script src='./simple.js'></script>
+  <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+  <script src='./simple.mysql.js'></script>
 </body>
 
 </html>
