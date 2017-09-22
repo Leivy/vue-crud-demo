@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./bootstrap-4-dev/dist/css/bootstrap.css">
+  <style>
+    #box {
+      width: 600px;
+      height: 600px;
+      margin: 20px;
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id='box'>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-btn">
+                <button class="btn btn-default" type="button">搜索</button>
+              </span>
+          <input type="text" v-model='keyword' class="form-control" placeholder="Search for...">
+        </div>
+        <!-- /input-group -->
+      </div>
+      <!-- /.col-lg-6 -->
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" v-model='addword' class="form-control" placeholder="add some...">
+          <span class="input-group-btn">
+                <button @click='add' class="btn btn-default" type="button">添加</button>
+              </span>
+        </div>
+        <!-- /input-group -->
+      </div>
+      <!-- /.col-lg-6 -->
+    </div>
+    <!-- /.row -->
+
+    <table class="table table-bordered" style='margin-top:20px'>
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>品牌</th>
+          <th>时间</th>
+          <th>价格</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for='(item,index) in newBrands' v-cloak>
+          <td>{{index + 1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.createTime | dateFormat }}</td>
+          <td>{{1+item.id + ',000k'}}</td>
+          <td>
+            <button @click='del(item.id)' type="button" class="btn-group btn-group-xs" role="group">删除</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="./"></script>
+  <script src="./bootstrap-4-dev/dist/js/bootstrap.js"></script>
+
+  <script src="./vue.js"></script>
+  <script src='./simple.js'></script>
+</body>
+
+</html>
