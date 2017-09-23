@@ -9,17 +9,23 @@
 	<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
 	<!-- CSS overrides - remove if you don't need it -->
 	<link rel="stylesheet" href="css/app.css">
+	<style>
+		[v-cloak] {
+			display: none!important;
+		}
+
+	</style>
 </head>
 
 <body>
 	<section class="todoapp" id="app">
 		<header class="header">
-			<h1>todos</h1>
-			<input class="new-todo" ng-keydown="add($event)" placeholder="What needs to be done?" ng-model="newTask" autofocus>
+			<h1>vue</h1>
+			<input class="new-todo" @keydown="add($event)" placeholder="What needs to be done?" v-model="newTask" autofocus>
 		</header>
 		<!-- This section should be hidden by default and shown when there are todos -->
 		<section class="main">
-			<input id="toggle-all" ng-change="toggleAll()" class="toggle-all" type="checkbox" ng-model="checkall">
+			<input id="toggle-all" v-model="checkall" @change="toggleAll()" class="toggle-all" type="checkbox">
 
 
 			<label for="toggle-all">Mark all as complete</label>
@@ -31,13 +37,13 @@
 					如果isCompleted属性为true 则就是所有的已经完成的任务
 					如果isCompleted属性为false 就是所有的未完成的任务
 					如果isCompleted属性为undefined 就是所有的任务！ -->
-				<li v-for='(item,index) in todos' ng-class="{completed: item.isCompleted, editing: item.id == editingid}">
+				<li v-for='(item,index) in todos' :class="{completed: item.isCompleted, editing: item.id == editingid}">
 					<div class="view">
-						<input class="toggle" type="checkbox" ng-model="item.isCompleted" ng-change="singleTaskCheck()">
-						<label ng-dblclick="edit(item.id)">{{item.title}}</label>
-						<button class="destroy" ng-click="del(item.id)"></button>
+						<input class="toggle" type="checkbox" v-model="item.isCompleted" @change="singleTaskCheck()">
+						<label @dblclick="edit(item.id)" v-cloak>{{item.title}}</label>
+						<button class="destroy" @click="del(item.id)"></button>
 					</div>
-					<input class="edit" v- ng-model="item.title" value="Create a TodoMVC template" ng-keydown="update($event)">
+					<input class="edit" v-model="item.title" value="Create a TodoMVC template" @keydown="update($event)">
 				</li>
 				<!-- <li>
 						<div class="view">
@@ -52,21 +58,21 @@
 		<!-- This footer should hidden by default and shown when there are todos -->
 		<footer class="footer">
 			<!-- This should be `0 items left` by default -->
-			<span class="todo-count"><strong ng-bind="getLeftCount()">0</strong> item left</span>
+			<span class="todo-count"><strong v-text="getLeftCount()">0</strong> item left</span>
 			<!-- Remove this if you don't implement routing -->
 			<ul class="filters">
 				<li>
-					<a ng-class="{selected: status==undefined}" href="#!/">All</a>
+					<a :class="{selected: status==undefined}" href="#all">All</a>
 				</li>
 				<li>
-					<a ng-class="{selected: status==false}" href="#!/active">Active</a>
+					<a :class="{selected: status==false}" href="#active">Active</a>
 				</li>
 				<li>
-					<a ng-class="{selected: status==true}" href="#!/completed">Completed</a>
+					<a :class="{selected: status==true}" href="#completed">Completed</a>
 				</li>
 			</ul>
 			<!-- Hidden if no completed items are left ↓ -->
-			<button class="clear-completed" ng-hide="isHideClrBtn" ng-click="clearAllComepleted()">Clear completed</button>
+			<button class="clear-completed" ng-hide="isHideClrBtn" @click="clearAllComepleted()">Clear completed</button>
 		</footer>
 	</section>
 	<footer class="info">
@@ -80,6 +86,7 @@
 	<!-- Scripts here. Don't remove ↓ -->
 	<script src="node_modules/todomvc-common/base.js"></script>
 	<script src="./js/vue.js"></script>
+	<script src="./node_modules/vue-router/dist/vue-router.js"></script>
 	<script src="./js/app.js"></script>
 </body>
 
